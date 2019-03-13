@@ -19,7 +19,7 @@ public class User implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(nullable = false) 
+	@Column
 	private String name;
 	
 	@Column(nullable = false, unique = true) 
@@ -31,19 +31,63 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private UserStatus status;
 
+	// password (nullable=false)
+	@Column(nullable= false)
+	private String password;
+
+	//creationDate (nullable=false)
+	@Column(nullable= false)
+	private String creationDate;
+
+	// dateOfBirth (nullable= true) //if the bool is true then dont have to write
+	@Column
+	private String dateOfBirth;
+
+	// setters and getter for password, creationDate and dateOfBirth
+
+	public String getPassword(){
+		return password;
+	}
+
+	public void setPassword(String password){
+		this.password = password;
+	}
+
+	public String getCreationDate(){
+
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate){
+		this.creationDate = creationDate;
+	}
+
+	public String getDateOfBirth(){
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth){
+
+		this.dateOfBirth = dateOfBirth;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
+
 		this.id = id;
 	}
 
 	public String getName() {
+
 		return name;
 	}
 
 	public void setName(String name) {
+
 		this.name = name;
 	}
 
@@ -64,10 +108,12 @@ public class User implements Serializable {
 	}
 
 	public UserStatus getStatus() {
+
 		return status;
 	}
 
 	public void setStatus(UserStatus status) {
+
 		this.status = status;
 	}
 
