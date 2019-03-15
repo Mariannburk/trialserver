@@ -35,7 +35,7 @@ public class UserService {
 
     public User createUser(User newUser) {
         newUser.setToken(UUID.randomUUID().toString());
-        newUser.setStatus(UserStatus.ONLINE);
+        newUser.setStatus(UserStatus.OFFLINE);
         //add creation date
         //String pattern = "dd/MM/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -45,8 +45,8 @@ public class UserService {
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
-    public User getUserById(Long id){
 
+    public User getUserById(Long id){
         return this.userRepository.findUserById(id); //finds user in the database based on user id
     }
 
@@ -54,8 +54,8 @@ public class UserService {
     public User updateUser(User user) {
         // Step 1: get user's id
         Long id = user.getId();
-        User new_user = this.userRepository.findUserById(id);
         // Step 2: find user in the database based on his id
+        User new_user = this.userRepository.findUserById(id);
         // Step 3: update his info using the new data (you need the setters) the info you update is DOB and USERNAME
         new_user.setDateOfBirth(user.getDateOfBirth());
         new_user.setUsername(user.getUsername());
@@ -73,6 +73,7 @@ public class UserService {
         String pass = user.getPassword();
         User valid_user = this.userRepository.findByUsername(username);
         if (username.equals(valid_user.getUsername()) && pass.equals(valid_user.getPassword())){
+            valid_user.setStatus(UserStatus.ONLINE);
             return valid_user;
         }
         return null;
